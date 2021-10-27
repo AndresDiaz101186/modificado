@@ -1,5 +1,7 @@
-package Domingo_Reto3.Reto3;
+package Domingo_Reto3.Reto3.controller;
 
+import Domingo_Reto3.Reto3.service.ServiciosReservaciones;
+import Domingo_Reto3.Reto3.model.Reservaciones;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,41 +17,63 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
 /**
- *
- * @author USUARIO
+ * escucha los llamados en la paguina para orientar 
+ * las acciones que realizaran los servicios y los metodos crud en las tablas 
+ * @author Andres Diaz
  */
 @RestController
 @RequestMapping("/api/Reservation")
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 public class ControladorReservaciones {
-    
+   
     @Autowired
     private ServiciosReservaciones servicio;
+    /**
+     * este mapeo orienta al llamado de todos los elementos contenidos en la tabla reservaciones
+     * @return 
+     */
     @GetMapping("/all")
     public List<Reservaciones> getReservations(){
         return servicio.getAll();
     }
-
+    /**
+     * este mapeo orienta al llamado de un a fila de la tabla reservaciones
+     * @param reservationId
+     * @return 
+     */
     @GetMapping("/{id}")
     public Optional<Reservaciones> getReservation(@PathVariable("id") int reservationId) {
         return servicio.getReservation(reservationId);
     }
+    /**
+     * este mapeo orienta al servicio de guardado de datos en la tabla reservaciones
+     * @param reservation
+     * @return 
+     */
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Reservaciones save(@RequestBody Reservaciones reservation) {
         return servicio.save(reservation);
     }
+    /**
+     * este mapeo orienta al servicio de actualizacion de datos en la tabla reservaciones
+     * @param reservation
+     * @return 
+     */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
     public Reservaciones update(@RequestBody Reservaciones reservation) {
         return servicio.update(reservation);
     }
+    /**
+     * este mapeo orienta al servicio de borrado de datos en la tabla reservaciones
+     * @param reservationId
+     * @return 
+     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int reservationId) {
         return servicio.deleteReservation(reservationId);
     }
-    
 }

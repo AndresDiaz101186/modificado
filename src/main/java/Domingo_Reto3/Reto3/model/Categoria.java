@@ -1,6 +1,4 @@
-package Domingo_Reto3.Reto3;
-
-//@author Nigth Crawler
+package Domingo_Reto3.Reto3.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
@@ -12,20 +10,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+/**
+ * Clase categoria
+ * @Autor Andres Diaz
+ * @Version 1.4
+ */
 @Entity
 @Table(name = "category")
 public class Categoria implements Serializable {
+    //atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String description;
-    
+    //impresion de vuelta requerida
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy="category")
     @JsonIgnoreProperties("category")
     private List<Quadbike> quadbikes;
-
+    //getter y setters
     public Integer getId() {
         return id;
     }

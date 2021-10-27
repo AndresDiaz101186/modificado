@@ -1,6 +1,4 @@
-package Domingo_Reto3.Reto3;
-
-//@author Nigth Crawler
+package Domingo_Reto3.Reto3.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
@@ -11,27 +9,29 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-
-
+/**clase mensaje
+ * 
+ * @author Andres Diaz
+ */
 @Entity
 @Table(name = "message")
 public class Mensaje implements Serializable {
-      @Id
+    //atributos
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMessage;
     private String messageText;
-    
+    //impresion de vuelta requerida
     @ManyToOne
     @JoinColumn(name="id")
     @JsonIgnoreProperties({"messages", "client", "reservations"})
     private Quadbike quadbike;
-
+    //impresion de vuelta requerida
     @ManyToOne
     @JoinColumn(name="clientId")
     @JsonIgnoreProperties({"messages", "reservations", "client"})
     private Cliente client;
-
+    //getter y setters
     public Integer getIdMessage() {
         return idMessage;
     }

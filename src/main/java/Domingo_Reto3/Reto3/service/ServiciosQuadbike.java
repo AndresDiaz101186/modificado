@@ -1,27 +1,40 @@
-package Domingo_Reto3.Reto3;
+package Domingo_Reto3.Reto3.service;
 
+import Domingo_Reto3.Reto3.repository.RepositorioQuadbike;
+import Domingo_Reto3.Reto3.model.Quadbike;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 /**
- *
- * @author USUARIO
+ * clase servicio cuatrimoto
+ * trabaja las llamadas, entradas, actualizaciones y borrado en conjunto con los metodos crud
+ * @author Andres Diaz
  */
 @Service
 public class ServiciosQuadbike {
-     @Autowired
+    @Autowired
     private RepositorioQuadbike metodosCrud;
-
+    /**
+     * lista todos los elementos contenidos en la tabla cuatrimoto
+     * @return 
+     */
     public List<Quadbike> getAll(){
         return metodosCrud.getAll();
     }
-
+    /**
+     * encuentra una fila espesifica de la tabla cuatrimoto
+     * @param quadbikeId
+     * @return 
+     */
     public Optional<Quadbike> getQuadbike(int quadbikeId) {
         return metodosCrud.getQuadbike(quadbikeId);
     }
-
+    /**
+     * verifica el id y le otorga una a la entrada para ser almacenada en la tabla 
+     * @param quadbike
+     * @return 
+     */
     public Quadbike save(Quadbike quadbike){
         if(quadbike.getId()==null){
             return metodosCrud.save(quadbike);
@@ -34,7 +47,11 @@ public class ServiciosQuadbike {
             }
         }
     }
-
+    /**
+     * este metodo ubica una fila en la tabla para ser modificada
+     * @param quadbike
+     * @return 
+     */
     public Quadbike update(Quadbike quadbike){
         if(quadbike.getId()!=null){
             Optional<Quadbike> e=metodosCrud.getQuadbike(quadbike.getId());
@@ -64,7 +81,11 @@ public class ServiciosQuadbike {
         }
     }
 
-
+    /**
+     * este metodo recibe un id para ubicar la fila de la tabla y eliminarla
+     * @param quadbikeId
+     * @return 
+     */
     public boolean deleteQuadbike(int quadbikeId) {
         Boolean aBoolean = getQuadbike(quadbikeId).map(quadbike -> {
             metodosCrud.delete(quadbike);

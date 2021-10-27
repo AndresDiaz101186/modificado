@@ -1,7 +1,6 @@
-package Domingo_Reto3.Reto3;
+package Domingo_Reto3.Reto3.model;
 
-//@author Nigth Crawler
-
+import Domingo_Reto3.Reto3.model.Mensaje;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.List;
@@ -13,11 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
+/**clase cliente
+ * 
+ * @author Andres Diaz
+ */
 @Entity
 @Table(name = "client")
 public class Cliente implements Serializable {
-    
+    //atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idClient;
@@ -25,15 +27,15 @@ public class Cliente implements Serializable {
     private String password;
     private String name;
     private Integer age;
-    
+    //impresion de vuelta requerida
      @OneToMany(cascade = {CascadeType.PERSIST},mappedBy="client")
     @JsonIgnoreProperties("client")
     public List<Mensaje>messages;
-
+    //impresion de vuelta requerida
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy="client")
     @JsonIgnoreProperties("client")
     public List<Reservaciones>reservations;
-
+    //getters y setters
     public Integer getIdClient() {
         return idClient;
     }

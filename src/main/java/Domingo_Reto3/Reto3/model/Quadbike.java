@@ -1,6 +1,7 @@
-package Domingo_Reto3.Reto3;
+package Domingo_Reto3.Reto3.model;
 
-//@author Nigth Crawler
+import Domingo_Reto3.Reto3.model.Mensaje;
+import Domingo_Reto3.Reto3.model.Categoria;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.List;
@@ -16,29 +17,40 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "quadbike")
-public class Quadbike implements Serializable{
-    
+/**
+ * Clase cuatrimoto
+ *
+ * @Autor Andres Diaz
+ * @Version 1.4
+ *
+ */
+public class Quadbike implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    //Atributos
     private Integer id;
     private String name;
     private String brand;
     private Integer year;
     private String description;
-    
+
+    //Relaciones
     @ManyToOne
     @JoinColumn(name = "categoryId")
-    @JsonIgnoreProperties("quadbikes")
+    @JsonIgnoreProperties("quadbike")
     private Categoria category;
-
-     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "quadbike")
+    //impresion de vuelta requerida
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "quadbike")
     @JsonIgnoreProperties({"quadbike", "client"})
     private List<Mensaje> messages;
-
-    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "quadbike")
+    //impresion de vuelta requerida
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "quadbike")
     @JsonIgnoreProperties({"quadbike", "client"})
     private List<Reservaciones> reservations;
 
+    //Getters y Setters
     public Integer getId() {
         return id;
     }
@@ -102,6 +114,5 @@ public class Quadbike implements Serializable{
     public void setReservations(List<Reservaciones> reservations) {
         this.reservations = reservations;
     }
-    
-    
+
 }
