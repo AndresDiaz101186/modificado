@@ -34,7 +34,7 @@ public class Reservaciones implements Serializable  {
     //impresion de vuelta requerida
     @ManyToOne
     @JoinColumn(name = "idClient")
-    @JsonIgnoreProperties({"reservations","messages"})
+    @JsonIgnoreProperties({"reservations","messages","quadbikes"})
     private Cliente client;
 
     private String score; 

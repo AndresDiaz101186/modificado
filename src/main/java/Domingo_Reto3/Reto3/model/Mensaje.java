@@ -24,12 +24,12 @@ public class Mensaje implements Serializable {
     //impresion de vuelta requerida
     @ManyToOne
     @JoinColumn(name="id")
-    @JsonIgnoreProperties({"messages", "client", "reservations"})
+    @JsonIgnoreProperties({"messages","reservations"})
     private Quadbike quadbike;
     //impresion de vuelta requerida
     @ManyToOne
     @JoinColumn(name="clientId")
-    @JsonIgnoreProperties({"messages", "reservations", "client"})
+    @JsonIgnoreProperties({"messages", "reservations"})
     private Cliente client;
     //getter y setters
     public Integer getIdMessage() {

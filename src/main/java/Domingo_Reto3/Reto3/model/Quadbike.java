@@ -39,7 +39,7 @@ public class Quadbike implements Serializable {
     //Relaciones
     @ManyToOne
     @JoinColumn(name = "categoryId")
-    @JsonIgnoreProperties("quadbike")
+    @JsonIgnoreProperties("quadbikes")
     private Categoria category;
     //impresion de vuelta requerida
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "quadbike")
