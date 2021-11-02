@@ -39,6 +39,8 @@ public class Reservaciones implements Serializable  {
 
     private String score; 
     //getters y setters
+
+
     public Integer getIdReservation() {
         return idReservation;
     }
@@ -94,6 +96,4 @@ public class Reservaciones implements Serializable  {
     public void setScore(String score) {
         this.score = score;
     }
-    
-    
 }

@@ -1,5 +1,7 @@
 package Domingo_Reto3.Reto3.controller;
 
+import Domingo_Reto3.Reto3.reports.CountClient;
+import Domingo_Reto3.Reto3.reports.ReservationStatus;
 import Domingo_Reto3.Reto3.service.ServiciosReservaciones;
 import Domingo_Reto3.Reto3.model.Reservaciones;
 import java.util.List;
@@ -75,5 +77,19 @@ public class ControladorReservaciones {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int reservationId) {
         return servicio.deleteReservation(reservationId);
+    }
+    @GetMapping("/report-status")
+    public ReservationStatus getReservationsStatusReport(){
+        return servicio.getReservationStatusReport();
+    }
+
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+    public List<Reservaciones> getReservationReportDate(@PathVariable("dateOne") String dateOne, @PathVariable("dateTwo") String dateTwo){
+        return servicio.getReservationPeriod(dateOne,dateTwo);
+    }
+
+    @GetMapping("/report-clients")
+    public List<CountClient> getClient(){
+        return servicio.getTopClients();
     }
 }
